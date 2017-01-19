@@ -16,6 +16,10 @@ int main() {
 			// Close window: exit
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			if (event.type == sf::Event::MouseButtonPressed) {
+				grid.chooseSquare(event.mouseButton.x, event.mouseButton.y);
+			}
 		}
 		
 		window.clear();

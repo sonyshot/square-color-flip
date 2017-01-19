@@ -18,6 +18,37 @@ ClickGrid::~ClickGrid() {
 	}
 }
 
+void ClickGrid::flipSquare(std::array<int, 2> square) {
+	if (m_pixelArray[square[0] + m_size*square[1]]) {
+		m_squares[square[0] + m_size*square[1]]->setFillColor(sf::Color::White);
+		m_pixelArray[square[0] + m_size*square[1]] = 0;
+	}
+	else {
+		m_squares[square[0] + m_size*square[1]]->setFillColor(sf::Color::Black);
+		m_pixelArray[square[0] + m_size*square[1]] = 1;
+	}
+}
+
+bool ClickGrid::chooseSquare(int clickX, int clickY) {
+	int relativeX = clickX - m_drawPos.x;
+	int relativeY = clickY - m_drawPos.y;
+	if ((0 <= relativeX && relativeX <= 110 * m_size + 10) && (0 <= relativeY && relativeY <= 110 * m_size + 10)) {
+		if (relativeX <= (relativeX / 110) * 110 + 10 || relativeY <= (relativeY / 110) * 110 + 10) {
+			std::cout << "selected between tiles" << std::endl;
+			return false;
+		}
+		else {
+			std::cout << "selected square x: " << relativeX / 110 << " y: " << relativeY / 110 << std::endl;
+			flipSquare({ relativeX / 110 , relativeY / 110 });
+			return true;
+		}
+	}
+	else {
+		std::cout << "selected outside grid" << std::endl;
+		return false;
+	}
+}
+
 void ClickGrid::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(m_background, states);
 
