@@ -29,22 +29,43 @@ void ClickGrid::flipSquare(std::array<int, 2> square) {
 	}
 }
 
+void ClickGrid::dragGrid(int clickX, int clickY) {
+
+}
+
+void ClickGrid::makeWaves() {
+	int distances[] = {m_size - 1 - m_lastSquare[0], m_lastSquare[0], m_size - 1 - m_lastSquare[1], m_lastSquare[1]};
+
+	int iterations = *std::max_element(distances, distances + 4);
+
+	for (int i = 1; i <= iterations; i++) {
+		int testX = m_lastSquare[0];
+	}
+}
+
+void ClickGrid::blinkRing(int num, int x, int y) {
+	
+}
+
 bool ClickGrid::chooseSquare(int clickX, int clickY) {
 	int relativeX = clickX - m_drawPos.x;
 	int relativeY = clickY - m_drawPos.y;
 	if ((0 <= relativeX && relativeX <= 110 * m_size + 10) && (0 <= relativeY && relativeY <= 110 * m_size + 10)) {
 		if (relativeX <= (relativeX / 110) * 110 + 10 || relativeY <= (relativeY / 110) * 110 + 10) {
 			std::cout << "selected between tiles" << std::endl;
+			//drag grid
 			return false;
 		}
 		else {
 			std::cout << "selected square x: " << relativeX / 110 << " y: " << relativeY / 110 << std::endl;
 			flipSquare({ relativeX / 110 , relativeY / 110 });
+			m_lastSquare = { relativeX / 110, relativeY / 110 };
 			return true;
 		}
 	}
 	else {
 		std::cout << "selected outside grid" << std::endl;
+		//call wave
 		return false;
 	}
 }
