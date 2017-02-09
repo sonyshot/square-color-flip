@@ -217,3 +217,7 @@ ModelManifest.xml
 /Testing code.vcxproj
 /Testing code.VC.VC.opendb
 /Testing code.VC.db
+*.sln
+ConsoleApplication2.VC.opendb
+*.vcxproj
+ConsoleApplication2/ConsoleApplication2.vcxproj.filters
