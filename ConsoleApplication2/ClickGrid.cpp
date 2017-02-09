@@ -137,7 +137,7 @@ int ClickGrid::newColor(int x, int y) {
 	int squareColor = 0;
 	for (int i = -1; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++) {
-			if (i || j) {
+			if ((i || j) && (!i||!j)) {
 				int testX = x + i;
 				int testY = y + j;
 				if (0 <= testX && testX < m_numSquares && 0 <= testY && testY < m_numSquares) {
@@ -146,7 +146,7 @@ int ClickGrid::newColor(int x, int y) {
 			}
 		}
 	}
-	return (squareColor / 8);
+	return (squareColor / 4);
 }
 
 bool ClickGrid::chooseSquare(int clickX, int clickY) {
@@ -178,7 +178,7 @@ void ClickGrid::update() {
 		flipRing(2, m_lastSquare[0], m_lastSquare[1]);
 		m_timer.restart();
 	}*/
-	if (m_GOL && m_timer.getElapsedTime().asSeconds() > 1) {
+	if (m_GOL && m_timer.getElapsedTime().asSeconds() > .016) {
 		std::vector<int> buffer = { 0 };
 		buffer.resize(m_numSquares*m_numSquares, 0);
 		if (!m_grayscale) {
@@ -200,9 +200,11 @@ void ClickGrid::update() {
 					m_squares[i]->setFillColor(sf::Color(255-colorChange, 255 - colorChange, 255 - colorChange));
 					buffer[i] = colorChange;
 				}
-				if (m_pixelArray[i]) {
-
+				else {
+					m_squares[i]->setFillColor(sf::Color::White);
+					buffer[i] = colorChange;
 				}
+				
  			}
 		}
 		m_pixelArray = buffer;

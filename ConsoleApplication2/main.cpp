@@ -5,7 +5,7 @@
 int main() {
 
 	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML window");
-	ClickGrid grid1(10, 60, sf::Vector2f(50.f, 50.f), 1);
+	ClickGrid grid1(5, 100, sf::Vector2f(50.f, 50.f), 1);
 	//ClickGrid grid2(3, sf::Vector2f(400.f, 400.f));
 
 	while (window.isOpen())
@@ -43,3 +43,8 @@ int main() {
 
 	return 0;
 }
+
+/*
+Todo:
+-Work on chooseSquare, isnt working right on higher resolutions
+*/
