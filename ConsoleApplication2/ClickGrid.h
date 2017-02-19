@@ -20,6 +20,7 @@ class ClickGrid : public sf::Drawable {
 	bool m_waving = 0;
 	bool m_GOL = 0;
 	bool m_grayscale = 0;
+	bool m_dragEnabled = 0;
 
 	void flipSquare(std::array<int, 2> square);
 

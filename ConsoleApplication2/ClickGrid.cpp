@@ -137,7 +137,7 @@ int ClickGrid::newColor(int x, int y) {
 	int squareColor = 0;
 	for (int i = -1; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++) {
-			if ((i || j) && (!i||!j)) {
+			if ((i || j)/* && (!i||!j) */) {
 				int testX = x + i;
 				int testY = y + j;
 				if (0 <= testX && testX < m_numSquares && 0 <= testY && testY < m_numSquares) {
@@ -146,7 +146,7 @@ int ClickGrid::newColor(int x, int y) {
 			}
 		}
 	}
-	return (squareColor / 4);
+	return squareColor / 8;
 }
 
 bool ClickGrid::chooseSquare(int clickX, int clickY) {
@@ -178,7 +178,7 @@ void ClickGrid::update() {
 		flipRing(2, m_lastSquare[0], m_lastSquare[1]);
 		m_timer.restart();
 	}*/
-	if (m_GOL && m_timer.getElapsedTime().asSeconds() > .016) {
+	if (m_GOL && m_timer.getElapsedTime().asSeconds() > .1) {
 		std::vector<int> buffer = { 0 };
 		buffer.resize(m_numSquares*m_numSquares, 0);
 		if (!m_grayscale) {
